@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.forms import ModelForm
 
 User = get_user_model()
 
@@ -9,6 +10,7 @@ User = get_user_model()
 #     name = models.CharField(max_length=255)
 #     discount_amount = models.FloatField() 
 #     create_date = models.DateField(auto_now=True)
+
 
 class Product(models.Model):
     name = models.CharField(max_length= 100)
@@ -25,10 +27,11 @@ class Product(models.Model):
 
 class Customer(models.Model):
     age = models.IntegerField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    nickname = models.CharField(max_length=255, default="")
 
     def __str__(self):
-        return self.user.username
+        return self.nickname
     
     class Meta:
         ordering = ['user']
@@ -57,7 +60,7 @@ class Address(models.Model):
     state = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.customer.user.username
+        return self.customer.nickname
 
     class Meta:
         verbose_name_plural = "Addresses"
