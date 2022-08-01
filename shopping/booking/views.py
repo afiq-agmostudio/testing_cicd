@@ -80,7 +80,7 @@ class AddressList(ListCreateAPIView):
     queryset = Address.objects.all()
     serializer_class = AddressSerializers
 
-class AddressDetail(ListCreateAPIView):
+class AddressDetail(RetrieveUpdateDestroyAPIView):
     queryset = Address.objects.all()
     serializer_class = AddressSerializers
 
@@ -91,8 +91,11 @@ class OrderItemsList(ListCreateAPIView):
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializers
 
+    # def get_serializer_context(self):
+    #     return {'request': self.request}
+
     # def get(self, request):
-    #     order_items = OrderItem.objects.select_related('customer_id','product_id').all()
+    #     orders_items = OrderItem.objects.select_related('customer_id','product_id').all()
     #     order_serializers = OrderItemSerializers(order_items, many=True, context={'request': request})
     #     return Response(order_serializers.data)
 
