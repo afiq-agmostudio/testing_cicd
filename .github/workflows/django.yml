@@ -28,6 +28,7 @@ jobs:
         pip install django-debug-toolbar
         pip install factory_boy   
         pip install psycopg2-binary
+        pip install django-extensions
         
     - name: Run Tests
       run: |
